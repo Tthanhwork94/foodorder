@@ -38,8 +38,8 @@ public class DoiTac implements Serializable {
     @Column(name = "loaiamthuc")
     private String loaiamthuc;
 
-    @Column(name = "diachichinhanh")
-    private String diachichinhanh;
+    @Column(name = "diachikinhdoanh")
+    private String diachikinhdoanh;
 
     @Column(name = "sdt")
     private String sdt;
