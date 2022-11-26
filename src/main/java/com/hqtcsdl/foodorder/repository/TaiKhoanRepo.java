@@ -10,4 +10,7 @@ import java.util.List;
 @Repository
 public interface TaiKhoanRepo extends JpaRepository<TaiKhoan,Long> {
     List<TaiKhoan> findAll();
+    TaiKhoan findByTendangnhap(String tendangnhap);
+
+    TaiKhoan save(TaiKhoan taiKhoan);
 }

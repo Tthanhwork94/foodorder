@@ -26,4 +26,6 @@ public class TaiKhoan implements Serializable {
 
     @Column(name = "trangthai")
     private String trangthai;
+
+
 }
