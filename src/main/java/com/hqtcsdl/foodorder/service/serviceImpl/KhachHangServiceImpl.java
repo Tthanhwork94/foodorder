@@ -18,4 +18,9 @@ public class KhachHangServiceImpl implements KhachHangService {
     public List<KhachHang> findAll() {
         return repo.findAll();
     }
+
+    @Override
+    public KhachHang save(KhachHang khachHang) {
+        return repo.save(khachHang);
+    }
 }

@@ -30,4 +30,11 @@ public class TaiKhoanController {
     public ResponseEntity<TaiKhoan> getTaiKhoanByTenDangNhap(@PathVariable("tendangnhap") String tendangnhap){
         return taiKhoanService.findTaiKhoanByTenDangNhap(tendangnhap);
     }
+
+    @GetMapping("/test/proc/{num}")
+    public List<TaiKhoan> getTst(@PathVariable("num") int num){
+
+        return taiKhoanService.test(num);
+
+    }
 }

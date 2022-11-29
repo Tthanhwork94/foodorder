@@ -1,18 +1,14 @@
 package com.hqtcsdl.foodorder.service;
 
 import com.hqtcsdl.foodorder.dto.MonDto;
-import com.hqtcsdl.foodorder.entity.DoiTac;
 import com.hqtcsdl.foodorder.entity.Mon;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface DoiTacService {
-    List<DoiTac> findAll();
-
-    DoiTac save(DoiTac doiTac);
+public interface MonService {
 
     List<Mon> findMenu(Integer madoitac);
-
-    DoiTac findByMaDoiTac(Long madoitac);
 
 }

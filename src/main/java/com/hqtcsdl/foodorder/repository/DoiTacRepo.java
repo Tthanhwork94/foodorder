@@ -9,4 +9,9 @@ import java.util.List;
 @Repository
 public interface DoiTacRepo extends JpaRepository<DoiTac,Long> {
     List<DoiTac> findAll();
+
+    DoiTac save(DoiTac doiTac);
+
+    DoiTac findByMadoitac(Long madoitac);
+
 }

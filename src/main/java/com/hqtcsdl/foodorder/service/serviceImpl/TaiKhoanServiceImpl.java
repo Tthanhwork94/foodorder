@@ -1,7 +1,10 @@
 package com.hqtcsdl.foodorder.service.serviceImpl;
 
 
+import com.hqtcsdl.foodorder.entity.DoiTac;
+import com.hqtcsdl.foodorder.entity.KhachHang;
 import com.hqtcsdl.foodorder.entity.TaiKhoan;
+import com.hqtcsdl.foodorder.entity.TaiXe;
 import com.hqtcsdl.foodorder.repository.TaiKhoanRepo;
 import com.hqtcsdl.foodorder.service.TaiKhoanService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.lang.reflect.Field;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +30,7 @@ public class TaiKhoanServiceImpl implements TaiKhoanService {
 
     @Override
     public List<TaiKhoan> findAll() {
-        return repo.findAll();
+        return repo.findDSTaiKhoan();
     }
 
     @Override
@@ -39,7 +44,7 @@ public class TaiKhoanServiceImpl implements TaiKhoanService {
          if (taiKhoan == null){
              taiKhoan = new TaiKhoan();
              taiKhoan.setTendangnhap(tendangnhap);
-             taiKhoan.setMatkhau(matkhau);
+             taiKhoan.setMatkhau(bcrypt.encode(matkhau));
              taiKhoan.setLoaitaikhoan(taiKhoanResponse.getLoaitaikhoan());
              taiKhoan.setTrangthai("chưa kích hoạt");
              TaiKhoan taikhoansaved=repo.save(taiKhoan);
@@ -69,7 +74,7 @@ public class TaiKhoanServiceImpl implements TaiKhoanService {
             System.out.println("dang nhap that bai");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(optional.get()); //404
         }else{
-            if(optional.get().getMatkhau().equals(taiKhoan.getMatkhau())){
+            if(bcrypt.matches(taiKhoan.getMatkhau(),optional.get().getMatkhau())){
                 System.out.println("dang nhap thanh cong");
                 return ResponseEntity.status(HttpStatus.OK).body(optional.get()); //200
             }else{
@@ -77,5 +82,13 @@ public class TaiKhoanServiceImpl implements TaiKhoanService {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(optional.get()); //400
             }
         }
+    }
+
+    @Override
+    public List<TaiKhoan> test(int num){
+        System.out.println(repo.get_taikhoantest(num).isEmpty());
+        System.out.println("th1");
+        return repo.get_taikhoantest(num);
+
     }
 }

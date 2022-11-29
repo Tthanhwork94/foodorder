@@ -10,4 +10,6 @@ import java.util.List;
 public interface TaiXeRepo extends JpaRepository<TaiXe,Long> {
 
     List<TaiXe> findAll();
+
+    TaiXe save(TaiXe taiXe);
 }

@@ -7,4 +7,6 @@ import java.util.List;
 public interface TaiXeService {
     List<TaiXe> findAll();
 
+    TaiXe save(TaiXe taiXe);
+
 }

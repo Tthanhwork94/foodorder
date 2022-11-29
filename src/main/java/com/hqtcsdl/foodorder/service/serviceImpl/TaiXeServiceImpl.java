@@ -21,4 +21,9 @@ public class TaiXeServiceImpl implements TaiXeService {
     public List<TaiXe> findAll() {
         return repo.findAll();
     }
+
+    @Override
+    public TaiXe save(TaiXe taiXe) {
+        return repo.save(taiXe);
+    }
 }

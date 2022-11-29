@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface KhachHangRepo extends JpaRepository<KhachHang,Long> {
     List<KhachHang> findAll();
+
+    KhachHang save(KhachHang khachHang);
 }

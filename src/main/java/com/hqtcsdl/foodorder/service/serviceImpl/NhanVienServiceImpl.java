@@ -14,6 +14,8 @@ public class NhanVienServiceImpl implements NhanVienService {
     @Autowired
     private NhanVienRepo repo;
 
+
+
     @Override
     public List<NhanVien> findALl() {
         return repo.findAll();

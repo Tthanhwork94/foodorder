@@ -2,9 +2,11 @@ package com.hqtcsdl.foodorder.service;
 
 
 
+import com.hqtcsdl.foodorder.entity.Mon;
 import com.hqtcsdl.foodorder.entity.TaiKhoan;
 import org.springframework.http.ResponseEntity;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface TaiKhoanService {
@@ -15,4 +17,8 @@ public interface TaiKhoanService {
     ResponseEntity<TaiKhoan>  findTaiKhoanByTenDangNhap(String tendangnhap);
 
     ResponseEntity<TaiKhoan> doLogin(TaiKhoan taiKhoan);
+
+    List<TaiKhoan> test(int num);
+
+
 }
