@@ -12,6 +12,14 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@NamedStoredProcedureQuery(
+        name = "proc_DT_xemThucDon",
+        procedureName = "proc_DT_xemThucDon",
+        resultClasses = Mon.class,
+        parameters = {
+                @StoredProcedureParameter(name = "madoitac", type = Long.class, mode = ParameterMode.IN)
+        }
+)
 public class Mon implements Serializable {
 
     @Id
@@ -33,6 +41,6 @@ public class Mon implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "madoitac", referencedColumnName = "madoitac")
-    private DoiTac doitac;
+    private DoiTac doiTac;
 
 }

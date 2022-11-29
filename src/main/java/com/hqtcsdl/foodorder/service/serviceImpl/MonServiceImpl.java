@@ -20,5 +20,30 @@ public class MonServiceImpl implements MonService {
         return repo.findMenu(madoitac);
     }
 
+    @Override
+    public Mon findByMamon(Long mamon) {
+        return repo.findByMamon(mamon);
+    }
 
+    @Override
+    public MonDto updateMon(MonDto dto) {
+        try{
+            repo.updateMon(dto.getMamon(),dto.getTenmon(),dto.getMieuta(),dto.getGia(),dto.getTinhtrang());
+            return dto;
+        }
+        catch (Exception e){
+            return dto;
+        }
+    }
+
+    @Override
+    public MonDto insertMon(MonDto dto) {
+        try{
+            repo.insertMon(dto.getTenmon(), dto.getMieuta(),dto.getGia(),dto.getTinhtrang(),dto.getDoitac());
+            return dto;
+        }
+        catch (Exception e){
+            return dto;
+        }
+    }
 }

@@ -2,6 +2,7 @@ package com.hqtcsdl.foodorder.controller;
 
 
 
+import com.hqtcsdl.foodorder.entity.Mon;
 import com.hqtcsdl.foodorder.entity.TaiKhoan;
 import com.hqtcsdl.foodorder.service.TaiKhoanService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import java.util.List;
 
@@ -17,6 +20,8 @@ import java.util.List;
 @RequestMapping("/api/taikhoan")
 public class TaiKhoanController {
 
+    @PersistenceContext
+    private EntityManager entityManager;
     @Autowired
     private TaiKhoanService taiKhoanService;
 
@@ -31,10 +36,12 @@ public class TaiKhoanController {
         return taiKhoanService.findTaiKhoanByTenDangNhap(tendangnhap);
     }
 
+    @SuppressWarnings("unchecked")
     @GetMapping("/test/proc/{num}")
-    public List<TaiKhoan> getTst(@PathVariable("num") int num){
-
-        return taiKhoanService.test(num);
+    public List<Mon> getTst(@PathVariable("num") Long num){
+        List<Mon> monList= entityManager.createNamedStoredProcedureQuery("proc_DT_xemThucDon")
+                .setParameter("madoitac", num).getResultList();
+        return monList;
 
     }
 }

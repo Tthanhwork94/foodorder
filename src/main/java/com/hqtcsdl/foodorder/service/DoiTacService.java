@@ -1,6 +1,7 @@
 package com.hqtcsdl.foodorder.service;
 
 import com.hqtcsdl.foodorder.dto.MonDto;
+import com.hqtcsdl.foodorder.entity.ChiNhanh;
 import com.hqtcsdl.foodorder.entity.DoiTac;
 import com.hqtcsdl.foodorder.entity.Mon;
 
@@ -14,5 +15,7 @@ public interface DoiTacService {
     List<Mon> findMenu(Integer madoitac);
 
     DoiTac findByMaDoiTac(Long madoitac);
+
+
 
 }

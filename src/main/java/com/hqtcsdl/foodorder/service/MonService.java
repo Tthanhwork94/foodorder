@@ -11,4 +11,9 @@ public interface MonService {
 
     List<Mon> findMenu(Integer madoitac);
 
+    Mon findByMamon(Long mamon);
+
+    MonDto updateMon(MonDto dto);
+
+    MonDto insertMon(MonDto dto);
 }
