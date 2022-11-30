@@ -4,10 +4,7 @@ import com.hqtcsdl.foodorder.dto.ChinhanhDto;
 import com.hqtcsdl.foodorder.dto.HopDongChiTietDto;
 import com.hqtcsdl.foodorder.dto.HopDongDto;
 import com.hqtcsdl.foodorder.dto.MonDto;
-import com.hqtcsdl.foodorder.entity.ChiNhanh;
-import com.hqtcsdl.foodorder.entity.DoiTac;
-import com.hqtcsdl.foodorder.entity.HopDong;
-import com.hqtcsdl.foodorder.entity.Mon;
+import com.hqtcsdl.foodorder.entity.*;
 import com.hqtcsdl.foodorder.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,6 +31,12 @@ public class DoiTacController {
 
     @Autowired
     private HopDongChiTietService hopDongChiTietService;
+
+    @Autowired
+    private DonDatHangService donDatHangService;
+
+    @Autowired
+    private DonDatHangChiTietService donDatHangChiTietService;
 
     @GetMapping("")
     public List<DoiTac> getALl(){
@@ -110,6 +113,30 @@ public class DoiTacController {
         System.out.println(dto.getMachinhanh());
         hopDongChiTietService.insertHopDongChiTiet(dto.getMahopdong(),dto.getMachinhanh());
         return ResponseEntity.status(HttpStatus.OK).body(1);
+    }
+
+    @GetMapping ("/dondathang/{madoitac}")
+    public ResponseEntity<List<DonDatHang>> getDonDatHang(@PathVariable("madoitac") Long madoitac){
+        return ResponseEntity.status(HttpStatus.OK).body(donDatHangService.findDonDatHangByMaDoiTac(madoitac));
+    }
+
+    @GetMapping("/dondathangchitiet/{madonhang}")
+    public ResponseEntity<List<DonDatHangChiTiet>> getDonDatHangChiTiet(@PathVariable("madonhang") Long madonhang){
+        List<DonDatHangChiTiet> donDatHangChiTiets= donDatHangChiTietService.findByMaDonHang(madonhang);
+        for (DonDatHangChiTiet e: donDatHangChiTiets) {
+            e.setTenmon(monService.findByMamon(e.getMamon()).getTenmon());
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(donDatHangChiTiets);
+    }
+
+    @GetMapping("/infor/{madoitac}")
+    public ResponseEntity<DoiTac> getInfoDoiTac(@PathVariable("madoitac") Long madoitac){
+        DoiTac doiTac=doiTacService.findByMaDoiTac(madoitac);
+        if(doiTac!=null){
+            return  ResponseEntity.status(HttpStatus.OK).body(doiTac);
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(doiTac);
+        }
     }
 }
 

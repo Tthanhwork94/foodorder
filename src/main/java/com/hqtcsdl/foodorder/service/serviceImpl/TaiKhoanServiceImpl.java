@@ -91,4 +91,23 @@ public class TaiKhoanServiceImpl implements TaiKhoanService {
         return repo.get_taikhoantest(num);
 
     }
+
+    @Override
+    public TaiKhoan findByMaTaiKhoan(Long mataikhoan) {
+        return repo.findByMataikhoan(mataikhoan);
+    }
+
+    @Override
+    @Transactional(rollbackOn = {Exception.class, Error.class})
+    public Integer changePassword(Long mataikhoan, String matkhaucu, String matkhaumoi) {
+        TaiKhoan taiKhoan = repo.findByMataikhoan(mataikhoan);
+        String matkhau = taiKhoan.getMatkhau();
+        if (bcrypt.matches(matkhaucu,matkhau)){
+            String hashPwd= bcrypt.encode(matkhaumoi);
+            Integer flag = repo.changePassword(mataikhoan,matkhaucu,hashPwd);
+            return flag;
+        }else{
+            return -1;
+        }
+    }
 }

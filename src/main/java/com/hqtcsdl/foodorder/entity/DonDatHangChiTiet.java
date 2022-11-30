@@ -9,6 +9,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "dondathangchitiet")
 @Data
+@IdClass(DonDatHangChiTiet.class)
 public class DonDatHangChiTiet implements Serializable {
 
     @Id
@@ -19,13 +20,15 @@ public class DonDatHangChiTiet implements Serializable {
     @Column(name = "mamon")
     private Long mamon;
 
-    @ManyToOne
-    @JoinColumn(name = "madondathang", referencedColumnName = "madondathang")
-    private DonDatHang dondathang;
-
-    @ManyToOne
-    @JoinColumn(name = "mamon", referencedColumnName = "mamon")
-    private Mon mon;
+//    @ManyToOne
+//    @JoinColumn(name = "madondathang",columnDefinition = "BINARY(8)",insertable = false, updatable = false)
+//    private DonDatHang dondathang;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "mamon",columnDefinition = "BINARY(8)",insertable = false, updatable = false)
+//    private Mon mon;
+    @Transient
+    private String tenmon;
 
     @Column(name = "soluong")
     private Integer soluong;
@@ -33,6 +36,4 @@ public class DonDatHangChiTiet implements Serializable {
     @Column(name = "dongia")
     private Double dongia;
 
-    @Column(name = "tuychon")
-    private String tuychon;
 }

@@ -20,5 +20,8 @@ public interface TaiKhoanService {
 
     List<TaiKhoan> test(int num);
 
+    TaiKhoan findByMaTaiKhoan(Long mataikhoan);
+
+    Integer changePassword(Long mataikhoan,String matkhaucu,String matkhaumoi);
 
 }
