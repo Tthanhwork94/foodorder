@@ -15,6 +15,7 @@ import java.sql.Timestamp;
 public class HopDongDto {
     private Long mahopdong;
     private Timestamp ngaylap;
+    private Timestamp ngayhethan;
     private Integer sochinhanhdk;
     private String sotaikhoan;
     private String nganhang;

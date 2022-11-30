@@ -1,15 +1,14 @@
 package com.hqtcsdl.foodorder.controller;
 
 import com.hqtcsdl.foodorder.dto.ChinhanhDto;
+import com.hqtcsdl.foodorder.dto.HopDongChiTietDto;
+import com.hqtcsdl.foodorder.dto.HopDongDto;
 import com.hqtcsdl.foodorder.dto.MonDto;
 import com.hqtcsdl.foodorder.entity.ChiNhanh;
 import com.hqtcsdl.foodorder.entity.DoiTac;
 import com.hqtcsdl.foodorder.entity.HopDong;
 import com.hqtcsdl.foodorder.entity.Mon;
-import com.hqtcsdl.foodorder.service.ChiNhanhService;
-import com.hqtcsdl.foodorder.service.DoiTacService;
-import com.hqtcsdl.foodorder.service.HopDongService;
-import com.hqtcsdl.foodorder.service.MonService;
+import com.hqtcsdl.foodorder.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +31,9 @@ public class DoiTacController {
 
     @Autowired
     private HopDongService hopdongService;
+
+    @Autowired
+    private HopDongChiTietService hopDongChiTietService;
 
     @GetMapping("")
     public List<DoiTac> getALl(){
@@ -91,6 +93,23 @@ public class DoiTacController {
     @GetMapping("/hopdong/{madoitac}")
     public ResponseEntity<List<HopDong>> getAllHopDong(@PathVariable("madoitac") Long madoitac){
         return ResponseEntity.status(HttpStatus.OK).body(hopdongService.findHopDongByMaDoiTac(madoitac));
+    }
+
+    @PostMapping("hopdong/insert")
+    public ResponseEntity<Long> insertHopDong(@RequestBody HopDongDto dto){
+        Long flag = hopdongService.insertHopDong(dto);
+        if(flag == -1){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(flag);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(flag);
+    }
+
+    @PostMapping("hopdong/insertchitiet")
+    public ResponseEntity<?> insertHopDong(@RequestBody HopDongChiTietDto dto){
+        System.out.println(dto.getMahopdong());
+        System.out.println(dto.getMachinhanh());
+        hopDongChiTietService.insertHopDongChiTiet(dto.getMahopdong(),dto.getMachinhanh());
+        return ResponseEntity.status(HttpStatus.OK).body(1);
     }
 }
 

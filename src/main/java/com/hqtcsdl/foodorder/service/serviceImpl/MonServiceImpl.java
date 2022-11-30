@@ -8,6 +8,7 @@ import com.hqtcsdl.foodorder.service.MonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -26,6 +27,7 @@ public class MonServiceImpl implements MonService {
     }
 
     @Override
+    @Transactional(rollbackOn = {Exception.class, Error.class})
     public MonDto updateMon(MonDto dto) {
         try{
             repo.updateMon(dto.getMamon(),dto.getTenmon(),dto.getMieuta(),dto.getGia(),dto.getTinhtrang());
@@ -37,6 +39,7 @@ public class MonServiceImpl implements MonService {
     }
 
     @Override
+    @Transactional(rollbackOn = {Exception.class, Error.class})
     public MonDto insertMon(MonDto dto) {
         try{
             repo.insertMon(dto.getTenmon(), dto.getMieuta(),dto.getGia(),dto.getTinhtrang(),dto.getDoitac());

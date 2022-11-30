@@ -7,6 +7,7 @@ import com.hqtcsdl.foodorder.service.ChiNhanhService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -37,6 +38,7 @@ public class ChiNhanhServiceImpl implements ChiNhanhService {
     }
 
     @Override
+    @Transactional(rollbackOn = {Exception.class, Error.class})
     public ChinhanhDto insertChinhanh(ChinhanhDto dto) {
         try {
             repo.insertChiNhanh(dto.getTenchinhanh(), dto.getDiachi(), dto.getGiomocua(),dto.getGiodongcua(),dto.getTinhtrang(),dto.getMadoitac());

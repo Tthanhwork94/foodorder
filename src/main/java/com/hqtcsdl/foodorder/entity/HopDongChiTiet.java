@@ -2,7 +2,9 @@ package com.hqtcsdl.foodorder.entity;
 
 
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,6 +12,9 @@ import java.io.Serializable;
 @Entity
 @Table(name = "hopdongchitiet")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@IdClass(HopDongChiTiet.class)
 public class HopDongChiTiet implements Serializable {
 
     @Id
@@ -20,11 +25,11 @@ public class HopDongChiTiet implements Serializable {
     @Column(name = "machinhanh")
     private Long machinhanh;
 
-    @ManyToOne
-    @JoinColumn(name = "mahopdong",referencedColumnName = "mahopdong")
-    private HopDong hopdong;
-
-    @ManyToOne
-    @JoinColumn(name = "machinhanh",referencedColumnName = "machinhanh")
-    private ChiNhanh chinhanh;
+//    @ManyToOne
+//    @JoinColumn(name = "mahopdong")
+//    private HopDong hopdong;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "machinhanh")
+//    private ChiNhanh chinhanh;
 }
