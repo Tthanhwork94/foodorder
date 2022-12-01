@@ -1,9 +1,6 @@
 package com.hqtcsdl.foodorder.controller;
 
-import com.hqtcsdl.foodorder.dto.ChinhanhDto;
-import com.hqtcsdl.foodorder.dto.HopDongChiTietDto;
-import com.hqtcsdl.foodorder.dto.HopDongDto;
-import com.hqtcsdl.foodorder.dto.MonDto;
+import com.hqtcsdl.foodorder.dto.*;
 import com.hqtcsdl.foodorder.entity.*;
 import com.hqtcsdl.foodorder.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,7 +105,7 @@ public class DoiTacController {
     }
 
     @PostMapping("hopdong/insertchitiet")
-    public ResponseEntity<?> insertHopDong(@RequestBody HopDongChiTietDto dto){
+    public ResponseEntity<?> insertHopDongChiTiet(@RequestBody HopDongChiTietDto dto){
         System.out.println(dto.getMahopdong());
         System.out.println(dto.getMachinhanh());
         hopDongChiTietService.insertHopDongChiTiet(dto.getMahopdong(),dto.getMachinhanh());
@@ -136,6 +133,17 @@ public class DoiTacController {
             return  ResponseEntity.status(HttpStatus.OK).body(doiTac);
         }else{
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(doiTac);
+        }
+    }
+
+    @PostMapping("/infor/change")
+    public Integer changeInfroDoiTac(@RequestBody DoiTacDto dto){
+        try {
+            doiTacService.changeInfor(dto);
+            return 1;
+        }catch (Exception e){
+            e.printStackTrace();
+            return -1;
         }
     }
 }

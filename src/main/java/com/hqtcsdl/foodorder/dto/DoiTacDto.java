@@ -16,4 +16,5 @@ public class DoiTacDto {
     private Integer donhangdukien;
     private String loaiamthuc;
     private String diachikinhdoanh;
+    private String sdt;
 }

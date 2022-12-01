@@ -9,4 +9,7 @@ import java.util.List;
 public interface DonHangRepo extends JpaRepository<DonDatHang,Long> {
     @Query(value = "select  * from DonDatHang where machinhanh in (select machinhanh from ChiNhanh where madoitac = :madoitac)",nativeQuery = true)
     List<DonDatHang> findDonDatHangByMaDoiTac(Long madoitac);
+
+    @Query(value = "EXECUTE proc_kh_dathang :sdtkh,:diachi,:tongsl,:makhachhang,:machinhanh,:tuychon",nativeQuery = true)
+    Integer insertDonHang(String sdtkh,String diachi,Integer tongsl,Long makhachhang,Long machinhanh,String tuychon);
 }

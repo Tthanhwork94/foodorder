@@ -1,16 +1,15 @@
 package com.hqtcsdl.foodorder.service.serviceImpl;
 
-import com.hqtcsdl.foodorder.dto.MonDto;
-import com.hqtcsdl.foodorder.entity.ChiNhanh;
+import com.hqtcsdl.foodorder.dto.DoiTacDto;
 import com.hqtcsdl.foodorder.entity.DoiTac;
 import com.hqtcsdl.foodorder.entity.Mon;
 import com.hqtcsdl.foodorder.repository.DoiTacRepo;
-import com.hqtcsdl.foodorder.repository.MonRepo;
 import com.hqtcsdl.foodorder.service.DoiTacService;
 import com.hqtcsdl.foodorder.service.MonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -43,7 +42,12 @@ public class DoiTacServiceImpl implements DoiTacService {
         return repo.findByMadoitac(madoitac);
     }
 
-
+    @Override
+    @Transactional(rollbackOn = {Exception.class, Error.class})
+    public Void changeInfor(DoiTacDto dto) {
+        repo.changeInfor(dto.getMadoitac(),dto.getEmail(),dto.getTenquan(),dto.getNguoidaidien(),dto.getDonhangdukien(),dto.getLoaiamthuc(),dto.getDiachikinhdoanh(),dto.getSdt());
+        return null;
+    }
 
 
 }
