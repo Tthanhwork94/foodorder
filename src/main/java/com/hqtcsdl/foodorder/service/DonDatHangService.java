@@ -16,4 +16,16 @@ public interface DonDatHangService {
 
     Integer huydonhang(Long madonhang);
 
+    List<DonDatHang> findAll();
+
+    void txnhandon(Long mataixe,Long madonhang);
+
+    void txlaydon(Long mataixe,Long madonhang);
+
+    void txgiaothanhcong(Long mataixe,Long madonhang);
+
+    List<DonDatHang> findByMaTaiXe(Long mataixe);
+
+    List<Float> thongke(Long mataixe, Integer nam);
+
 }
