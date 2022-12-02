@@ -12,4 +12,8 @@ public interface DonDatHangService {
 
     Integer insertDonHang(DonHangDto dto);
 
+    List<DonDatHang> findDonHangByMaKhachHang(Long makhachhang);
+
+    Integer huydonhang(Long madonhang);
+
 }

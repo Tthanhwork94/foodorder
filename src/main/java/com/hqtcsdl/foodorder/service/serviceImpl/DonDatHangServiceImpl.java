@@ -29,4 +29,15 @@ public class DonDatHangServiceImpl implements DonDatHangService {
         return repo.insertDonHang(dto.getSdtkhachhang(), dto.getDiachigiaohang(), 0, dto.getMakhachhang(),dto.getMachinhanh(),dto.getTuychon());
     }
 
+    @Override
+    public List<DonDatHang> findDonHangByMaKhachHang(Long makhachhang) {
+        return repo.findDonDatHangByMaKhachHang(makhachhang);
+    }
+
+    @Override
+    @Transactional(rollbackOn = {Error.class,Exception.class})
+    public Integer huydonhang(Long madonhang) {
+        return repo.huyDonHang(madonhang);
+    }
+
 }
