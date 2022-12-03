@@ -105,11 +105,16 @@ public class DoiTacController {
     }
 
     @PostMapping("hopdong/insertchitiet")
-    public ResponseEntity<?> insertHopDongChiTiet(@RequestBody HopDongChiTietDto dto){
-        System.out.println(dto.getMahopdong());
-        System.out.println(dto.getMachinhanh());
-        hopDongChiTietService.insertHopDongChiTiet(dto.getMahopdong(),dto.getMachinhanh());
-        return ResponseEntity.status(HttpStatus.OK).body(1);
+    public ResponseEntity<?> insertHopDongChiTiet(@RequestBody List<HopDongChiTietDto> dto){
+        try{
+            dto.forEach(d->{
+                hopDongChiTietService.insertHopDongChiTiet(d.getMahopdong(),d.getMachinhanh());
+            });
+            return ResponseEntity.status(HttpStatus.OK).body(1);
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.OK).body(-1);
+        }
     }
 
     @GetMapping ("/dondathang/{madoitac}")

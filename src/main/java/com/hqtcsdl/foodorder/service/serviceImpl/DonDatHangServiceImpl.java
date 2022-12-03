@@ -78,4 +78,22 @@ public class DonDatHangServiceImpl implements DonDatHangService {
         return thongke;
     }
 
+    @Override
+    public List<Float> thongketongtien(int nam) {
+        List<Float> tongtien = new ArrayList<>();
+        for(int i = 1;i<=12;i++){
+            tongtien.add(repo.thongke_tongtien(i,nam));
+        }
+        return tongtien;
+    }
+
+    @Override
+    public List<Float> thongkesoluong(int nam) {
+        List<Float> tongtien = new ArrayList<>();
+        for(int i = 1;i<=12;i++){
+            tongtien.add(repo.thongke_soluong(i,nam));
+        }
+        return tongtien;
+    }
+
 }

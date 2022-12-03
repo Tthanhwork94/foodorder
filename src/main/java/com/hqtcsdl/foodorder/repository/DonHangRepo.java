@@ -24,7 +24,7 @@ public interface DonHangRepo extends JpaRepository<DonDatHang,Long> {
     List<DonDatHang> findAll();
 
     @Modifying(clearAutomatically = true)
-    @Query(value = "UPDATE DonDatHang SET mataixe=:mataixe,trangthai=:trangthai where madondathang=:madondathang",nativeQuery = true)
+    @Query(value = "EXECUTE proc_tx_update_donhang :mataixe,:trangthai, :madondathang",nativeQuery = true)
     void TaiXeupdateTrangThai(Long mataixe,String trangthai,Long madondathang);
 
     @Query(value = "select  * from DonDatHang where mataixe=:mataixe",nativeQuery = true)
@@ -32,4 +32,11 @@ public interface DonHangRepo extends JpaRepository<DonDatHang,Long> {
 
     @Query(value = "EXECUTE proc_tx_thongkethunhap :mataixe,:thang,:nam",nativeQuery = true)
     Float thongke(Long mataixe, Integer thang, Integer nam);
+
+
+    @Query(value = "EXECUTE  proc_nv_thongke_tongtien :thang,:nam",nativeQuery = true)
+    Float thongke_tongtien(int thang,int nam);
+
+    @Query(value = "EXECUTE  proc_nv_thongke_soluong :thang,:nam",nativeQuery = true)
+    Float thongke_soluong(int thang,int nam);
 }

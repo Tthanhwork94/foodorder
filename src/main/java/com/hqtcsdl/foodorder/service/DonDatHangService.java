@@ -28,4 +28,8 @@ public interface DonDatHangService {
 
     List<Float> thongke(Long mataixe, Integer nam);
 
+    List<Float> thongketongtien(int nam);
+
+    List<Float> thongkesoluong(int nam);
+
 }

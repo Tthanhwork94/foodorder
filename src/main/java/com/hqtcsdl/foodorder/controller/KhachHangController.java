@@ -54,9 +54,17 @@ public class KhachHangController {
     }
 
     @PostMapping("donhangchitiet/insert")
-    public ResponseEntity<?> integerDonHangChiTiet(@RequestBody DonHangChiTietDto dto){
-       donDatHangChiTietService.insertDonHangChiTiet(dto);
-       return ResponseEntity.status(HttpStatus.OK).body(1);
+    public ResponseEntity<?> integerDonHangChiTiet(@RequestBody List<DonHangChiTietDto> dto){
+        try{
+            dto.forEach(d->{
+                System.out.println(d.getMadondathang());
+                System.out.println(d.getMamon());
+                donDatHangChiTietService.insertDonHangChiTiet(d);
+            });
+            return ResponseEntity.status(HttpStatus.OK).body(1);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.OK).body(-1);
+        }
     }
 
     @GetMapping("donhang/huy/{madonhang}")

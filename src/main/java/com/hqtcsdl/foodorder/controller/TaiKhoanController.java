@@ -6,11 +6,10 @@ import com.hqtcsdl.foodorder.entity.Mon;
 import com.hqtcsdl.foodorder.entity.TaiKhoan;
 import com.hqtcsdl.foodorder.service.TaiKhoanService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -36,12 +35,26 @@ public class TaiKhoanController {
         return taiKhoanService.findTaiKhoanByTenDangNhap(tendangnhap);
     }
 
-    @SuppressWarnings("unchecked")
-    @GetMapping("/test/proc/{num}")
-    public List<Mon> getTst(@PathVariable("num") Long num){
-        List<Mon> monList= entityManager.createNamedStoredProcedureQuery("proc_DT_xemThucDon")
-                .setParameter("madoitac", num).getResultList();
-        return monList;
+//    @SuppressWarnings("unchecked")
+//    @GetMapping("/test/proc/{num}")
+//    public List<Mon> getTst(@PathVariable("num") Long num){
+//        List<Mon> monList= entityManager.createNamedStoredProcedureQuery("proc_DT_xemThucDon")
+//                .setParameter("madoitac", num).getResultList();
+//        return monList;
+//
+//    }
 
+    @PostMapping("/updatetrangthai/{mataikhoan}")
+    public ResponseEntity<?> updateTrangThaiTaiKhoan(@PathVariable("mataikhoan") Long mataikhoan,@RequestBody String trangthai){
+        try{
+            System.out.println(trangthai.equals("dkh="));
+            trangthai=(trangthai.equals("dkh="))?"đã kích hoạt":"đã khóa";
+            System.out.println(trangthai);
+            taiKhoanService.updateTrangThaiTaiKhoan(mataikhoan,trangthai);
+            return ResponseEntity.status(HttpStatus.OK).body(mataikhoan);
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.OK).body(-1);
+        }
     }
 }

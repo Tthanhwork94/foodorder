@@ -24,4 +24,6 @@ public interface TaiKhoanService {
 
     Integer changePassword(Long mataikhoan,String matkhaucu,String matkhaumoi);
 
+    void updateTrangThaiTaiKhoan(Long mataikhoan,String trangthai);
+
 }

@@ -2,6 +2,7 @@ package com.hqtcsdl.foodorder.repository;
 
 import com.hqtcsdl.foodorder.entity.HopDong;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -15,5 +16,11 @@ public interface HopDongRepo extends JpaRepository<HopDong,Long> {
 
     @Query(value = "execute proc_DT_themHopDong :sochinhanhdk,:sotaikhoan,:nganhang,:trangthai,:madoitac",nativeQuery = true)
     Long insertHopDong(Integer sochinhanhdk,String sotaikhoan,String nganhang, String trangthai, Long madoitac);
+
+    List<HopDong> findAll();
+
+    @Modifying(clearAutomatically = true)
+    @Query(value = "UPDATE HopDong Set trangthai=:trangthai, manhanvien=:manhanvien where mahopdong=:mahopdong",nativeQuery = true)
+    void settrangthai(String trangthai,Long mahopdong,Long manhanvien);
 
 }

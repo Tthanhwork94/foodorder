@@ -46,7 +46,7 @@ public class TaiKhoanServiceImpl implements TaiKhoanService {
              taiKhoan.setTendangnhap(tendangnhap);
              taiKhoan.setMatkhau(bcrypt.encode(matkhau));
              taiKhoan.setLoaitaikhoan(taiKhoanResponse.getLoaitaikhoan());
-             taiKhoan.setTrangthai("chưa kích hoạt");
+             taiKhoan.setTrangthai("đã kích hoạt");
              TaiKhoan taikhoansaved=repo.save(taiKhoan);
              System.out.println("dang ky thanh cong");
              return ResponseEntity.status(HttpStatus.OK).body(taikhoansaved);
@@ -74,7 +74,7 @@ public class TaiKhoanServiceImpl implements TaiKhoanService {
             System.out.println("dang nhap that bai");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(optional.get()); //404
         }else{
-            if(bcrypt.matches(taiKhoan.getMatkhau(),optional.get().getMatkhau())){
+            if((taikhoanCheck.getTrangthai()).equals("đã kích hoạt")&&bcrypt.matches(taiKhoan.getMatkhau(),optional.get().getMatkhau())){
                 System.out.println("dang nhap thanh cong");
                 return ResponseEntity.status(HttpStatus.OK).body(optional.get()); //200
             }else{
@@ -109,5 +109,11 @@ public class TaiKhoanServiceImpl implements TaiKhoanService {
         }else{
             return -1;
         }
+    }
+
+    @Override
+    @Transactional(rollbackOn = {Exception.class, Error.class})
+    public void updateTrangThaiTaiKhoan(Long mataikhoan, String trangthai) {
+        repo.updateTrangThaiTaiKhoan(mataikhoan,trangthai);
     }
 }

@@ -27,4 +27,15 @@ public class HopDongServiceImpl implements HopDongService {
         return repo.insertHopDong(dto.getSochinhanhdk(),dto.getSotaikhoan(),dto.getNganhang(),"chưa kích hoạt",dto.getMadoitac());
     }
 
+    @Override
+    public List<HopDong> findAll() {
+        return repo.findAll();
+    }
+
+    @Override
+    @Transactional(rollbackOn = {Exception.class, Error.class})
+    public void settranthai(String trangthai, Long mahopdong,Long manhanvien) {
+        repo.settrangthai(trangthai,mahopdong,manhanvien);
+    }
+
 }

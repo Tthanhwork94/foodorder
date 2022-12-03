@@ -10,4 +10,8 @@ public interface HopDongService {
     List<HopDong> findHopDongByMaDoiTac(Long madoitac);
 
     Long insertHopDong(HopDongDto dto);
+
+    List<HopDong> findAll();
+
+    void settranthai(String trangthai,Long mahopdong,Long manhanvien);
 }
