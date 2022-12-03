@@ -96,4 +96,10 @@ public class DonDatHangServiceImpl implements DonDatHangService {
         return tongtien;
     }
 
+    @Override
+    @Transactional(rollbackOn = {Exception.class, Error.class})
+    public void doitacxacnhandon(String trangthai, Long madonhang) {
+        repo.doitacupdatetrangthai(trangthai,madonhang);
+    }
+
 }

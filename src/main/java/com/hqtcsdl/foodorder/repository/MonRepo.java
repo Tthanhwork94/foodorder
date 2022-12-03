@@ -21,9 +21,11 @@ public interface MonRepo extends JpaRepository<Mon,Long> {
 
     Mon save(Mon mon);
 
+    @Modifying(clearAutomatically = true)
     @Query(value = "execute proc_DT_capnhatmonan :mamon,:tenmon,:mieuta,:gia,:tinhtrang",nativeQuery = true)
     void updateMon(Long mamon, String tenmon, String mieuta, Float gia, String tinhtrang);
 
+    @Modifying(clearAutomatically = true)
     @Query(value = "execute proc_DT_themMonAn :tenmon,:mieuta,:gia,:tinhtrang,:madoitac",nativeQuery = true)
     void insertMon(String tenmon, String mieuta, Float gia, String tinhtrang, Long madoitac);
 }

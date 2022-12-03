@@ -108,6 +108,8 @@ public class DoiTacController {
     public ResponseEntity<?> insertHopDongChiTiet(@RequestBody List<HopDongChiTietDto> dto){
         try{
             dto.forEach(d->{
+                System.out.println(d.getMahopdong());
+                System.out.println(d.getMachinhanh());
                 hopDongChiTietService.insertHopDongChiTiet(d.getMahopdong(),d.getMachinhanh());
             });
             return ResponseEntity.status(HttpStatus.OK).body(1);
@@ -148,6 +150,16 @@ public class DoiTacController {
             return 1;
         }catch (Exception e){
             e.printStackTrace();
+            return -1;
+        }
+    }
+
+    @GetMapping("/donhang/xacnhan/{madonhang}")
+    public Integer xacnhandonhang(@PathVariable("madonhang") Long madonhang){
+        try{
+            donDatHangService.doitacxacnhandon("đang chuẩn bị",madonhang);
+            return 1;
+        }catch (Exception e){
             return -1;
         }
     }

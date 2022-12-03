@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 public interface HopDongChiTietRepo extends JpaRepository<HopDongChiTiet,Long> {
 
     @Modifying(clearAutomatically = true)
-    @Query(value = "INSERT INTO HopDongChiTiet with(tablock, xlock) values (:mahopdong,:machinhanh)",nativeQuery = true)
+    @Query(value = "EXECUTE proc_DT_themHopDongChiTiet :mahopdong,:machinhanh",nativeQuery = true)
     void insertHopDongChiTiet(Long mahopdong, Long machinhanh);
 }

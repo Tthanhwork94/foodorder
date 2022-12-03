@@ -32,4 +32,6 @@ public interface DonDatHangService {
 
     List<Float> thongkesoluong(int nam);
 
+    void doitacxacnhandon(String trangthai, Long madonhang);
+
 }
