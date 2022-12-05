@@ -34,7 +34,7 @@ public class HopDongServiceImpl implements HopDongService {
 
     @Override
     @Transactional(rollbackOn = {Exception.class, Error.class})
-    public void settranthai(String trangthai, Long mahopdong,Long manhanvien) {
+    public void settrangthai(String trangthai, Long mahopdong,Long manhanvien) {
         repo.settrangthai(trangthai,mahopdong,manhanvien);
     }
 

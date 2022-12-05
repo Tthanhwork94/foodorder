@@ -14,7 +14,7 @@ import java.util.List;
 public interface MonRepo extends JpaRepository<Mon,Long> {
     List<Mon> findAll();
 
-    @Query(value = "select * from Mon where  madoitac = :madoitac", nativeQuery = true)
+    @Query(value = "select * from Mon with(nolock) where  madoitac = :madoitac", nativeQuery = true)
     List<Mon> findMenu(@Param("madoitac") Integer madoitac);
 
     Mon findByMamon(Long mamon);

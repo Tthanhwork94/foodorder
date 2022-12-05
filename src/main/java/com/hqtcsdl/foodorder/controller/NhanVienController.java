@@ -40,7 +40,7 @@ public class NhanVienController {
     @GetMapping("/hopdong/duyet/{mahopdong}/{manhanvien}")
     public Integer duyetHopDong(@PathVariable("mahopdong") Long mahopdong,@PathVariable("manhanvien") Long manhanvien){
         try{
-            hopDongService.settranthai("đã kích hoạt",mahopdong,manhanvien);
+            hopDongService.settrangthai("đã kích hoạt",mahopdong,manhanvien);
             return 1;
         }catch (Exception e){
             return -1;

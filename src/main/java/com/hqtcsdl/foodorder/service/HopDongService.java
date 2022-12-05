@@ -13,5 +13,5 @@ public interface HopDongService {
 
     List<HopDong> findAll();
 
-    void settranthai(String trangthai,Long mahopdong,Long manhanvien);
+    void settrangthai(String trangthai,Long mahopdong,Long manhanvien);
 }
