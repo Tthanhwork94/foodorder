@@ -41,6 +41,6 @@ public interface DonHangRepo extends JpaRepository<DonDatHang,Long> {
     Float thongke_soluong(int thang,int nam);
 
     @Modifying(clearAutomatically = true)
-    @Query(value = "UPDATE DonDatHang set trangthai=:trangthai where madondathang=:madonhang with(repeatable read)",nativeQuery = true)
+    @Query(value = "UPDATE DonDatHang set trangthai=:trangthai where madondathang=:madonhang",nativeQuery = true)
     void doitacupdatetrangthai(String trangthai,Long madonhang);
 }

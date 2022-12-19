@@ -49,7 +49,7 @@ public class DonDatHangServiceImpl implements DonDatHangService {
     @Override
     @Transactional(rollbackOn = {Exception.class, Error.class})
     public void txnhandon(Long mataixe, Long madonhang) {
-        repo.TaiXeupdateTrangThai(mataixe,"đang chuẩn bị",madonhang);
+        repo.TaiXeupdateTrangThai(mataixe,null,madonhang);
     }
 
     @Override

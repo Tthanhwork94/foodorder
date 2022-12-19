@@ -47,4 +47,16 @@ public class DonDatHang implements Serializable {
     @JoinColumn(name = "mataixe",referencedColumnName = "mataixe")
     private TaiXe taixe;
 
+    @Column(name = "tenkhachhang")
+    private String tenkhachhang;
+
+    @Column(name = "tentaixe")
+    private String tentaixe;
+
+    @Column(name = "madoitac")
+    private Long madoitac;
+
+    @Column(name = "diachichinhanh")
+    private String diachichinhanh;
+
 }
