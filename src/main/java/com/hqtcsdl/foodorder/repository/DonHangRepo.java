@@ -8,8 +8,10 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface DonHangRepo extends JpaRepository<DonDatHang,Long> {
-    @Query(value = "select  * from DonDatHang where machinhanh in (select machinhanh from ChiNhanh where madoitac = :madoitac)",nativeQuery = true)
+    @Query(value = "select  * from DonDatHang where madoitac :madoitac",nativeQuery = true)
     List<DonDatHang> findDonDatHangByMaDoiTac(Long madoitac);
+
+    List<DonDatHang> findByMadoitac(Long madoitac);
 
     @Query(value = "EXECUTE proc_kh_dathang :sdtkh,:diachi,:tongsl,:makhachhang,:machinhanh,:tuychon",nativeQuery = true)
     Integer insertDonHang(String sdtkh,String diachi,Integer tongsl,Long makhachhang,Long machinhanh,String tuychon);
@@ -20,9 +22,9 @@ public interface DonHangRepo extends JpaRepository<DonDatHang,Long> {
     @Query(value = "EXECUTE proc_kh_huydonhang :madonhang",nativeQuery = true)
     Integer huyDonHang(Long madonhang);
 
-    @Query(value = "select  * from DonDatHang",nativeQuery = true)
     List<DonDatHang> findAll();
 
+    List<DonDatHang> findByMataixeIsNull();
     @Modifying(clearAutomatically = true)
     @Query(value = "EXECUTE proc_tx_update_donhang :mataixe,:trangthai, :madondathang",nativeQuery = true)
     void TaiXeupdateTrangThai(Long mataixe,String trangthai,Long madondathang);
@@ -43,4 +45,7 @@ public interface DonHangRepo extends JpaRepository<DonDatHang,Long> {
     @Modifying(clearAutomatically = true)
     @Query(value = "UPDATE DonDatHang set trangthai=:trangthai where madondathang=:madonhang",nativeQuery = true)
     void doitacupdatetrangthai(String trangthai,Long madonhang);
+
+    @Query(value = "select  * from DonDatHang where mataixe is null order by madondathang asc offset :offset rows fetch next 100 rows only ",nativeQuery = true)
+    List<DonDatHang> findDonHangChuaNhan(Integer offset);
 }

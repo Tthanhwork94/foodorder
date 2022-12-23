@@ -34,4 +34,6 @@ public interface DonDatHangService {
 
     void doitacxacnhandon(String trangthai, Long madonhang);
 
+    List<DonDatHang> findDonHangChuaNhan(Integer offset);
+
 }

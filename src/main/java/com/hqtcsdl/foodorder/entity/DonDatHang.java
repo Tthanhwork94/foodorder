@@ -29,26 +29,26 @@ public class DonDatHang implements Serializable {
     @Column(name = "trangthai")
     private String trangthai;
 
+    @Column(name = "tongsoluong")
+    private Integer tongsoluong;
+
     @Column(name = "phigiaohang")
     private Double phigiaohang;
 
     @Column(name = "thanhtien")
     private Double thanhtien;
 
-    @ManyToOne
-    @JoinColumn(name = "makhachhang",referencedColumnName = "makhachhang")
-    private KhachHang khachhang;
+    @Column(name = "tuychon")
+    private String tuychon;
 
-    @ManyToOne
-    @JoinColumn(name = "machinhanh",referencedColumnName = "machinhanh")
-    private ChiNhanh chinhanh;
-
-    @ManyToOne
-    @JoinColumn(name = "mataixe",referencedColumnName = "mataixe")
-    private TaiXe taixe;
+    @Column(name = "makhachhang")
+    private Long makhachhang;
 
     @Column(name = "tenkhachhang")
     private String tenkhachhang;
+
+    @Column(name = "mataixe")
+    private Long mataixe;
 
     @Column(name = "tentaixe")
     private String tentaixe;
@@ -58,5 +58,8 @@ public class DonDatHang implements Serializable {
 
     @Column(name = "diachichinhanh")
     private String diachichinhanh;
+
+    @Column(name = "tenchinhanh")
+    private String tenchinhanh;
 
 }

@@ -21,7 +21,7 @@ public class DonDatHangServiceImpl implements DonDatHangService {
 
     @Override
     public List<DonDatHang> findDonDatHangByMaDoiTac(Long madoitac) {
-        return repo.findDonDatHangByMaDoiTac(madoitac);
+        return repo.findByMadoitac(madoitac);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class DonDatHangServiceImpl implements DonDatHangService {
 
     @Override
     public List<DonDatHang> findAll() {
-        return repo.findAll();
+        return repo.findByMataixeIsNull();
     }
 
     @Override
@@ -100,6 +100,11 @@ public class DonDatHangServiceImpl implements DonDatHangService {
     @Transactional(rollbackOn = {Exception.class, Error.class})
     public void doitacxacnhandon(String trangthai, Long madonhang) {
         repo.doitacupdatetrangthai(trangthai,madonhang);
+    }
+
+    @Override
+    public List<DonDatHang> findDonHangChuaNhan(Integer offset) {
+        return repo.findDonHangChuaNhan(offset);
     }
 
 }
